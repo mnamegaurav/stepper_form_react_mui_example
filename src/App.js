@@ -1,4 +1,6 @@
 import React from "react";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import {
   Box,
   Stepper,
@@ -8,7 +10,10 @@ import {
   Typography,
   Grid,
   Paper,
-} from "@mui/material";
+  MobileStepper,
+  Container,
+} from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import PersonalInformation from "./components/PersonalInformation";
 import ContactInformation from "./components/ContactInformation";
@@ -17,6 +22,53 @@ import EmergencyContactInformation from "./components/EmergencyContactInformatio
 import GuarantorInformation from "./components/GuarantorInformation";
 import AccommodationInformation from "./components/AccommodationInformation";
 import Success from "./components/Success";
+import BaseForm from "./layouts/BaseForm";
+
+const useStyles = makeStyles((theme) => ({
+  bshLogo: {
+    [theme.breakpoints.up("md")]: {
+      height: "2rem",
+    },
+    height: "20px",
+  },
+  container: {
+    justifyContent: "center",
+  },
+  mobileStepper: {
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    display: "flex",
+    flexGrow: 1,
+    background: "transparent",
+    paddingLeft: "0",
+    paddingRight: "0",
+    justifyContent: "center",
+  },
+  mobileOnly: {
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+    display: "block",
+  },
+  desktopOnly: {
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
+    display: "none",
+  },
+  responsiveButtonGroup: {
+    display: "flex",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      justifyContent: "flex-start",
+    },
+  },
+  responsiveNextBtn: {
+    marginLeft: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {},
+  },
+}));
 
 const steps = [
   "Personal Information",
@@ -28,14 +80,16 @@ const steps = [
 ];
 
 export default function App() {
+  const classes = useStyles();
+  const theme = useTheme();
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [formState, setFormState] = React.useState({});
 
-  const handleInputChange = (event) => {
-    console.log(formState);
+  const handleInputChange = ({ fieldName, fieldValue }) => {
     setFormState((prevFormState) => ({
       ...prevFormState,
-      [event.target.name]: event.target.value,
+      [fieldName]: fieldValue,
     }));
   };
 
@@ -100,76 +154,103 @@ export default function App() {
     }
   };
 
+  const nextButton = () => (
+    <Button
+      onClick={handleNext}
+      disableElevation
+      variant="contained"
+      color="primary"
+      className={classes.responsiveNextBtn}
+    >
+      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+      {theme.direction === "rtl" ? (
+        <KeyboardArrowLeft />
+      ) : (
+        <KeyboardArrowRight />
+      )}
+    </Button>
+  );
+
+  const backButton = () => (
+    <Button
+      color="inherit"
+      disabled={activeStep === 0}
+      onClick={handleBack}
+      variant="contained"
+      disableElevation
+    >
+      {theme.direction === "rtl" ? (
+        <KeyboardArrowRight />
+      ) : (
+        <KeyboardArrowLeft />
+      )}
+      Back
+    </Button>
+  );
+
   return (
-    <Grid container spacing={10}>
-      <Grid item md={12}>
-        <Box style={{ textAlign: "center" }} mt={5}>
-          <img alt="bsh" src="bsh_logo.png" width="416" height="30" />
-        </Box>
-      </Grid>
-      <Grid item md={3}>
-        <Box ml={3}>
-          <Paper
-            elevation={1}
-            variant="outlined"
-            style={{ background: "transparent" }}
-          >
-            <Box p={3}>
-              <Stepper activeStep={activeStep} orientation="vertical">
-                {steps.map((label, index) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            </Box>
-          </Paper>
-        </Box>
-      </Grid>
-      <Grid item md={8}>
-        <Paper
-          elevation={1}
-          variant="outlined"
-          style={{ background: "transparent" }}
-        >
-          <Box p={3}>
-            {activeStep === steps.length ? (
-              <Success
-                handleReset={handleReset}
-                handleBack={handleBack}
-                formState={formState}
-              />
-            ) : (
-              <>
-                <Box mb={3}>
-                  <Typography variant="h5">{steps[activeStep]}</Typography>
-                </Box>
-                <Box>{renderForm(activeStep)}</Box>
-                <Box mt={3}>
-                  <Button
-                    color="inherit"
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    variant="outlined"
-                    disableElevation
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    onClick={handleNext}
-                    disableElevation
-                    variant="contained"
-                    color="info"
-                    style={{ marginLeft: "10px" }}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
-                </Box>
-              </>
-            )}
-          </Box>
-        </Paper>
-      </Grid>
-    </Grid>
+    <Box>
+      <Box style={{ textAlign: "center" }} mt={7} mb={3}>
+        <img alt="bsh" src="bsh_logo.png" className={classes.bshLogo} />
+      </Box>
+      <Container>
+        <Grid container spacing={4} className={classes.container}>
+          <Grid item md={4} xl={3} className={classes.desktopOnly}>
+            <Paper variant="outlined" style={{ background: "#f9f9f9e0" }}>
+              <Box p={3}>
+                <Stepper
+                  activeStep={activeStep}
+                  orientation="vertical"
+                  style={{ background: "transparent" }}
+                >
+                  {steps.map((label, index) => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </Box>
+            </Paper>
+          </Grid>
+          <Grid item md={8} xl={9}>
+            <Paper variant="outlined" style={{ background: "#f9f9f9e0" }}>
+              <Box py={3}>
+                {activeStep === steps.length ? (
+                  <Success
+                    handleReset={handleReset}
+                    handleBack={handleBack}
+                    formState={formState}
+                  />
+                ) : (
+                  <>
+                    <BaseForm>
+                      <Box className={classes.mobileOnly}>
+                        <MobileStepper
+                          variant="dots"
+                          steps={steps.length}
+                          position="static"
+                          activeStep={activeStep}
+                          className={classes.mobileStepper}
+                        />
+                      </Box>
+                      <Box my={3}>
+                        <Typography variant="h5">
+                          {steps[activeStep]}
+                        </Typography>
+                      </Box>
+                      {renderForm(activeStep)}
+                      <Box mt={3} className={classes.responsiveButtonGroup}>
+                        {backButton()}
+                        {nextButton()}
+                      </Box>
+                    </BaseForm>
+                  </>
+                )}
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 }

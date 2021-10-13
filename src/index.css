@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: linear-gradient(90deg, #aad03a 0%, #28bebc 100%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 code {
@@ -17,4 +20,8 @@ button {
   text-transform: none !important;
   padding-left: 2rem !important;
   padding-right: 2rem !important;
+}
+
+.react-tel-input .special-label {
+  display: none !important;
 }

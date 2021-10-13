@@ -6,15 +6,13 @@ import {
   FormControl,
   Select,
   InputLabel,
-} from "@mui/material";
-
-import BaseForm from "../layouts/BaseForm";
+} from "@material-ui/core";
 
 export default function CourseInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
@@ -24,7 +22,12 @@ export default function CourseInformation(props) {
             variant="outlined"
             name="university"
             defaultValue={formState.university}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
@@ -37,7 +40,12 @@ export default function CourseInformation(props) {
             name="course"
             fullWidth
             defaultValue={formState.course}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12}>
@@ -46,13 +54,19 @@ export default function CourseInformation(props) {
               Enrollment Status (for the next academic year)
             </InputLabel>
             <Select
+              size="small"
               labelId="demo-simple-select-label"
               label="Enrollment Status (for the next academic year)"
               variant="outlined"
               name="enrollmentStatus"
               fullWidth
               defaultValue={formState.enrollmentStatus}
-              onChange={handleInputChange}
+              onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
               required
             >
               <MenuItem value={1}>First Year Undergraduate</MenuItem>
@@ -65,6 +79,6 @@ export default function CourseInformation(props) {
           </FormControl>
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

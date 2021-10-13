@@ -7,16 +7,14 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
-} from "@mui/material";
-import PhoneInput from "react-phone-number-input";
-
-import BaseForm from "../layouts/BaseForm";
+} from "@material-ui/core";
+import PhoneInput from "react-phone-input-2";
 
 export default function EmergencyContactInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -26,21 +24,41 @@ export default function EmergencyContactInformation(props) {
             variant="outlined"
             name="emergencyContactName"
             defaultValue={formState.emergencyContactName}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <PhoneInput
+            inputStyle={{
+              font: "inherit",
+              width: "100%",
+              height: "1.1876em",
+              margin: "0",
+              display: "block",
+              minWidth: "0",
+              background: "transparent",
+            }}
+            specialLabel="Emergency Mobile Number"
+            placeholder="Emergency Mobile Number"
             required
             size="small"
             label="Emergency Mobile Number"
             variant="outlined"
             name="emergencyMobileNumber"
-            defaultValue={formState.emergencyMobileNumber}
-            onChange={(value) => console.log(value)}
+            value={formState.emergencyMobileNumber}
+            onChange={(value) =>
+              handleInputChange({
+                fieldName: "emergencyMobileNumber",
+                fieldValue: value,
+              })
+            }
             fullWidth
-            inputComponent={TextField}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -52,7 +70,12 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactAddressLine1"
             fullWidth
             defaultValue={formState.emergencyContactAddressLine1}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -64,19 +87,30 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactAddressLine2"
             fullWidth
             defaultValue={formState.emergencyContactAddressLine2}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
             size="small"
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             id="date"
             name="emergencyContactDob"
             label="Date Of Birth"
             type="date"
             fullWidth
+            variant="outlined"
             defaultValue={formState.emergencyContactDob || new Date()}
             InputLabelProps={{
               shrink: true,
@@ -92,7 +126,12 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactRelationship"
             fullWidth
             defaultValue={formState.emergencyContactRelationship}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -104,7 +143,12 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactCity"
             fullWidth
             defaultValue={formState.emergencyContactCity}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -116,7 +160,12 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactState"
             fullWidth
             defaultValue={formState.emergencyContactState}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -128,7 +177,12 @@ export default function EmergencyContactInformation(props) {
             name="emergencyContactZip"
             fullWidth
             defaultValue={formState.emergencyContactZip}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12}>
@@ -141,7 +195,12 @@ export default function EmergencyContactInformation(props) {
               aria-label="gender"
               name="gender"
               defaultValue={formState.isGuarantorDifferenceFromEmergencyContact}
-              onChange={handleInputChange}
+              onChange={(event) =>
+                handleInputChange({
+                  fieldName: event.target.name,
+                  fieldValue: event.target.value,
+                })
+              }
               required
             >
               <FormControlLabel value="yes" control={<Radio />} label="Yes" />
@@ -150,6 +209,6 @@ export default function EmergencyContactInformation(props) {
           </FormControl>
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

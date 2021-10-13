@@ -7,16 +7,15 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
-} from "@mui/material";
+} from "@material-ui/core";
 
-import BaseForm from "../layouts/BaseForm";
 
 export default function PersonalInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
-      <Grid container spacing={5}>
+    <>
+      <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
             required
@@ -25,7 +24,12 @@ export default function PersonalInformation(props) {
             variant="outlined"
             name="firstName"
             defaultValue={formState.firstName}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
@@ -38,19 +42,30 @@ export default function PersonalInformation(props) {
             name="lastName"
             fullWidth
             defaultValue={formState.lastName}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
             size="small"
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             id="date"
             name="dob"
             label="Date Of Birth"
             type="date"
             fullWidth
+            variant="outlined"
             defaultValue={formState.dob || new Date()}
             InputLabelProps={{
               shrink: true,
@@ -65,7 +80,12 @@ export default function PersonalInformation(props) {
               aria-label="gender"
               name="gender"
               defaultValue={formState.gender}
-              onChange={handleInputChange}
+              onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             >
               <FormControlLabel
                 value="female"
@@ -90,7 +110,12 @@ export default function PersonalInformation(props) {
             name="nationality"
             fullWidth
             defaultValue={formState.nationality}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -102,10 +127,15 @@ export default function PersonalInformation(props) {
             name="country"
             fullWidth
             defaultValue={formState.country}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

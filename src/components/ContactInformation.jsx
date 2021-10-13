@@ -1,14 +1,12 @@
 import React from "react";
-import { Grid, TextField } from "@mui/material";
-import PhoneInput from "react-phone-number-input";
-
-import BaseForm from "../layouts/BaseForm";
+import { Grid, TextField } from "@material-ui/core";
+import PhoneInput from "react-phone-input-2";
 
 export default function ContactInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -18,21 +16,41 @@ export default function ContactInformation(props) {
             variant="outlined"
             name="email"
             defaultValue={formState.email}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <PhoneInput
+            inputStyle={{
+              font: "inherit",
+              width: "100%",
+              height: "1.1876em",
+              margin: "0",
+              display: "block",
+              minWidth: "0",
+              background: "transparent",
+            }}
+            specialLabel="Mobile Number"
             required
+            placeholder="Mobile Number"
             size="small"
             label="Mobile Number"
             variant="outlined"
             name="mobileNumber"
             fullWidth
-            defaultValue={formState.mobileNumber}
-            onChange={(value) => console.log(value)}
-            inputComponent={TextField}
+            value={formState.mobileNumber}
+            onChange={(value) =>
+              handleInputChange({
+                fieldName: "mobileNumber",
+                fieldValue: value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -44,7 +62,12 @@ export default function ContactInformation(props) {
             name="addressLine1"
             fullWidth
             defaultValue={formState.addressLine1}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -56,7 +79,12 @@ export default function ContactInformation(props) {
             name="addressLine2"
             fullWidth
             defaultValue={formState.addressLine2}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -68,7 +96,12 @@ export default function ContactInformation(props) {
             name="city"
             fullWidth
             defaultValue={formState.city}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -80,7 +113,12 @@ export default function ContactInformation(props) {
             name="state"
             fullWidth
             defaultValue={formState.state}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -92,10 +130,15 @@ export default function ContactInformation(props) {
             name="zip"
             fullWidth
             defaultValue={formState.zip}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

@@ -7,15 +7,13 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
-} from "@mui/material";
-
-import BaseForm from "../layouts/BaseForm";
+} from "@material-ui/core";
 
 export default function AccommodationInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <TextField
@@ -26,7 +24,12 @@ export default function AccommodationInformation(props) {
             variant="outlined"
             name="emailsIdsOfAllPeople"
             defaultValue={formState.emailsIdsOfAllPeople}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             placeholder="e.g. Peter Parker:peterparker@gmail.com"
             rows={4}
             fullWidth
@@ -43,7 +46,12 @@ export default function AccommodationInformation(props) {
               aria-label="howLongToStay"
               name="howLongToStay"
               defaultValue={formState.howLongToStay}
-              onChange={handleInputChange}
+              onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
               required
             >
               <FormControlLabel
@@ -69,7 +77,12 @@ export default function AccommodationInformation(props) {
                 name="otherLengthOfStay"
                 disabled={parseInt(formState.howLongToStay) !== 1}
                 defaultValue={formState.otherLengthOfStay}
-                onChange={handleInputChange}
+                onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
               />
             </RadioGroup>
           </FormControl>
@@ -80,7 +93,12 @@ export default function AccommodationInformation(props) {
             size="small"
             label="When do you wish to move in to this accommodation?"
             variant="outlined"
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             name="moveInDate"
             type="date"
             fullWidth
@@ -98,7 +116,12 @@ export default function AccommodationInformation(props) {
             variant="outlined"
             name="roomType"
             defaultValue={formState.roomType}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
@@ -113,7 +136,12 @@ export default function AccommodationInformation(props) {
               aria-label="isMedicalConditionOrDisability"
               name="isMedicalConditionOrDisability"
               defaultValue={formState.isMedicalConditionOrDisability}
-              onChange={handleInputChange}
+              onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
               required
             >
               <FormControlLabel value="1" control={<Radio />} label="Yes" />
@@ -129,12 +157,17 @@ export default function AccommodationInformation(props) {
             variant="outlined"
             name="specialRequirements"
             defaultValue={formState.specialRequirements}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             rows={4}
             fullWidth
           />
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

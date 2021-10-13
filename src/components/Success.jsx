@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography, Box } from "@mui/material";
+import { Button, Typography, Box } from "@material-ui/core";
 
 import BaseForm from "../layouts/BaseForm";
 

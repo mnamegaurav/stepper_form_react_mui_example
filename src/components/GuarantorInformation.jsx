@@ -1,14 +1,12 @@
 import React from "react";
-import { Grid, TextField } from "@mui/material";
-import PhoneInput from "react-phone-number-input";
-
-import BaseForm from "../layouts/BaseForm";
+import { Grid, TextField } from "@material-ui/core";
+import PhoneInput from "react-phone-input-2";
 
 export default function GuarantorInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
-    <BaseForm>
+    <>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -18,21 +16,42 @@ export default function GuarantorInformation(props) {
             variant="outlined"
             name="guarantorContactName"
             defaultValue={formState.guarantorContactName}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <PhoneInput
+            inputStyle={{
+              font: "inherit",
+              width: "100%",
+              height: "1.1876em",
+              margin: "0",
+              display: "block",
+              minWidth: "0",
+              background: "transparent",
+            }}
+            specialLabel="Guarantor Mobile Number"
+            placeholder="Guarantor Mobile Number"
             required
+            country={"us"}
             size="small"
             label="Guarantor Mobile Number"
             variant="outlined"
             name="guarantorMobileNumber"
-            defaultValue={formState.guarantorMobileNumber}
-            onChange={(value) => console.log(value)}
+            value={formState.guarantorMobileNumber}
+            onChange={(value) =>
+              handleInputChange({
+                fieldName: "guarantorMobileNumber",
+                fieldValue: value,
+              })
+            }
             fullWidth
-            inputComponent={TextField}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -44,7 +63,12 @@ export default function GuarantorInformation(props) {
             name="guarantorContactAddressLine1"
             fullWidth
             defaultValue={formState.guarantorContactAddressLine1}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -56,19 +80,30 @@ export default function GuarantorInformation(props) {
             name="guarantorContactAddressLine2"
             fullWidth
             defaultValue={formState.guarantorContactAddressLine2}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
             required
             size="small"
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
             id="date"
             name="guarantorContactDob"
             label="Date Of Birth"
             type="date"
             fullWidth
+            variant="outlined"
             defaultValue={formState.guarantorContactDob || new Date()}
             InputLabelProps={{
               shrink: true,
@@ -84,7 +119,12 @@ export default function GuarantorInformation(props) {
             name="guarantorContactRelationship"
             fullWidth
             defaultValue={formState.guarantorContactRelationship}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -96,7 +136,12 @@ export default function GuarantorInformation(props) {
             name="guarantorContactCity"
             fullWidth
             defaultValue={formState.guarantorContactCity}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -108,7 +153,12 @@ export default function GuarantorInformation(props) {
             name="guarantorContactState"
             fullWidth
             defaultValue={formState.guarantorContactState}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -120,10 +170,15 @@ export default function GuarantorInformation(props) {
             name="guarantorContactZip"
             fullWidth
             defaultValue={formState.guarantorContactZip}
-            onChange={handleInputChange}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
           />
         </Grid>
       </Grid>
-    </BaseForm>
+    </>
   );
 }

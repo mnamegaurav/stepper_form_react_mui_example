@@ -10,7 +10,6 @@ import {
   Select,
   MenuItem,
   InputAdornment,
-  InputBase
 } from "@material-ui/core";
 
 import { useStore } from "../store";

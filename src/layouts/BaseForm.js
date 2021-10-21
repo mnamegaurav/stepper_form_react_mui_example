@@ -77,30 +77,30 @@ export default function BaseForm(props) {
     dispatch({
       type: UI_LOADING_START,
     });
-    // axios
-    //   .post("booking/api/booking/create/", JSON.stringify(formData))
-    //   .then((res) => {
-    //     //Show the alert
-    //     console.log(res);
-    //     dispatch({
-    //       type: FORM_SUBMIT_SUCCESS,
-    //     });
-    //     // End Loading the UI
-    //     dispatch({
-    //       type: UI_LOADING_END,
-    //     });
-    //     handleNext()
-    //   })
-    //   .catch((err) => {
-    //     console.log(ErrorRounded);
-    //     dispatch({
-    //       type: FORM_SUBMIT_FAILED,
-    //     });
-    //     // End Loading the UI
-    //     dispatch({
-    //       type: UI_LOADING_END,
-    //     });
-    //   });
+    axios
+      .post("booking/api/booking/create/", JSON.stringify(formData))
+      .then((res) => {
+        //Show the alert
+        console.log(res);
+        dispatch({
+          type: FORM_SUBMIT_SUCCESS,
+        });
+        // End Loading the UI
+        dispatch({
+          type: UI_LOADING_END,
+        });
+        handleNext();
+      })
+      .catch((err) => {
+        console.log(ErrorRounded);
+        dispatch({
+          type: FORM_SUBMIT_FAILED,
+        });
+        // End Loading the UI
+        dispatch({
+          type: UI_LOADING_END,
+        });
+      });
   };
 
   const renderForm = (activeStep) => {

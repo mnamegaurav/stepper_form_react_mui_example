@@ -1,28 +1,20 @@
 import React from "react";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import {
   Box,
   Stepper,
   Step,
   StepLabel,
-  Button,
   Typography,
   Grid,
   Paper,
   MobileStepper,
   Container,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-import PersonalInformation from "./components/PersonalInformation";
-import ContactInformation from "./components/ContactInformation";
-import CourseInformation from "./components/CourseInformation";
-import EmergencyContactInformation from "./components/EmergencyContactInformation";
-import GuarantorInformation from "./components/GuarantorInformation";
-import AccommodationInformation from "./components/AccommodationInformation";
 import Success from "./components/Success";
 import BaseForm from "./layouts/BaseForm";
+import { useStore } from "./store";
 
 const useStyles = makeStyles((theme) => ({
   bshLogo: {
@@ -57,140 +49,16 @@ const useStyles = makeStyles((theme) => ({
     },
     display: "none",
   },
-  responsiveButtonGroup: {
-    display: "flex",
-    justifyContent: "center",
-    [theme.breakpoints.up("md")]: {
-      justifyContent: "flex-start",
-    },
-  },
-  responsiveNextBtn: {
-    marginLeft: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {},
-  },
 }));
-
-const steps = [
-  "Personal Information",
-  "Contact Information",
-  "Course Information",
-  "Emergency Contact Information",
-  "Guarantor Information",
-  "Accommodation Information",
-];
 
 export default function App() {
   const classes = useStyles();
-  const theme = useTheme();
-
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [formState, setFormState] = React.useState({});
-
-  const handleInputChange = ({ fieldName, fieldValue }) => {
-    setFormState((prevFormState) => ({
-      ...prevFormState,
-      [fieldName]: fieldValue,
-    }));
-  };
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
-  const renderForm = (activeStep) => {
-    switch (activeStep) {
-      case 0:
-        return (
-          <PersonalInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 1:
-        return (
-          <ContactInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 2:
-        return (
-          <CourseInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 3:
-        return (
-          <EmergencyContactInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 4:
-        return (
-          <GuarantorInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      case 5:
-        return (
-          <AccommodationInformation
-            formState={formState}
-            handleInputChange={handleInputChange}
-          />
-        );
-      default:
-        return <Typography>Some Error Found</Typography>;
-    }
-  };
-
-  const nextButton = () => (
-    <Button
-      onClick={handleNext}
-      disableElevation
-      variant="contained"
-      color="primary"
-      className={classes.responsiveNextBtn}
-    >
-      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-      {theme.direction === "rtl" ? (
-        <KeyboardArrowLeft />
-      ) : (
-        <KeyboardArrowRight />
-      )}
-    </Button>
-  );
-
-  const backButton = () => (
-    <Button
-      color="inherit"
-      disabled={activeStep === 0}
-      onClick={handleBack}
-      variant="contained"
-      disableElevation
-    >
-      {theme.direction === "rtl" ? (
-        <KeyboardArrowRight />
-      ) : (
-        <KeyboardArrowLeft />
-      )}
-      Back
-    </Button>
-  );
+  const [state] = useStore();
+  const { steps, activeStep } = state;
 
   return (
     <Box>
-      <Box style={{ textAlign: "center" }} mt={7} mb={3}>
+      <Box style={{ textAlign: "center" }} mt={7} mb={5}>
         <img alt="bsh" src="bsh_logo.png" className={classes.bshLogo} />
       </Box>
       <Container>
@@ -216,35 +84,22 @@ export default function App() {
             <Paper variant="outlined" style={{ background: "#f9f9f9e0" }}>
               <Box py={3}>
                 {activeStep === steps.length ? (
-                  <Success
-                    handleReset={handleReset}
-                    handleBack={handleBack}
-                    formState={formState}
-                  />
+                  <Success />
                 ) : (
-                  <>
-                    <BaseForm>
-                      <Box className={classes.mobileOnly}>
-                        <MobileStepper
-                          variant="dots"
-                          steps={steps.length}
-                          position="static"
-                          activeStep={activeStep}
-                          className={classes.mobileStepper}
-                        />
-                      </Box>
-                      <Box my={3}>
-                        <Typography variant="h5">
-                          {steps[activeStep]}
-                        </Typography>
-                      </Box>
-                      {renderForm(activeStep)}
-                      <Box mt={3} className={classes.responsiveButtonGroup}>
-                        {backButton()}
-                        {nextButton()}
-                      </Box>
-                    </BaseForm>
-                  </>
+                  <BaseForm>
+                    <Box className={classes.mobileOnly}>
+                      <MobileStepper
+                        variant="dots"
+                        steps={steps.length}
+                        position="static"
+                        activeStep={activeStep}
+                        className={classes.mobileStepper}
+                      />
+                    </Box>
+                    <Box mb={3}>
+                      <Typography variant="h5">{steps[activeStep]}</Typography>
+                    </Box>
+                  </BaseForm>
                 )}
               </Box>
             </Paper>

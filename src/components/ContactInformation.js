@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, TextField } from "@material-ui/core";
 import PhoneInput from "react-phone-input-2";
 
-export default function GuarantorInformation(props) {
+export default function ContactInformation(props) {
   const { formState, handleInputChange } = props;
 
   return (
@@ -12,16 +12,21 @@ export default function GuarantorInformation(props) {
           <TextField
             required
             size="small"
-            label="Guarantor contact name"
+            label="Email"
+            placeholder="Email"
             variant="outlined"
-            name="guarantorContactName"
-            defaultValue={formState.guarantorContactName}
+            name="email"
+            type="email"
+            defaultValue={formState.email}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
             fullWidth
           />
         </Grid>
@@ -36,22 +41,22 @@ export default function GuarantorInformation(props) {
               minWidth: "0",
               background: "transparent",
             }}
-            specialLabel="Guarantor Mobile Number"
-            placeholder="Guarantor Mobile Number"
+            country={"gb"}
+            specialLabel="Mobile Number"
             required
-            country={"us"}
+            placeholder="Mobile Number"
             size="small"
-            label="Guarantor Mobile Number"
+            label="Mobile Number"
             variant="outlined"
-            name="guarantorMobileNumber"
-            value={formState.guarantorMobileNumber}
+            name="mobile_number"
+            fullWidth
+            value={formState.mobile_number}
             onChange={(value) =>
               handleInputChange({
-                fieldName: "guarantorMobileNumber",
+                fieldName: "mobile_number",
                 fieldValue: value,
               })
             }
-            fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -59,52 +64,17 @@ export default function GuarantorInformation(props) {
             required
             size="small"
             label="Address line 1"
+            placeholder="Address line 1"
             variant="outlined"
-            name="guarantorContactAddressLine1"
+            name="address_line_1"
             fullWidth
-            defaultValue={formState.guarantorContactAddressLine1}
+            defaultValue={formState.address_line_1}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            size="small"
-            label="Address line 2"
-            variant="outlined"
-            name="guarantorContactAddressLine2"
-            fullWidth
-            defaultValue={formState.guarantorContactAddressLine2}
-            onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            size="small"
-            onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
-            id="date"
-            name="guarantorContactDob"
-            label="Date Of Birth"
-            type="date"
-            fullWidth
-            variant="outlined"
-            defaultValue={formState.guarantorContactDob || new Date()}
             InputLabelProps={{
               shrink: true,
             }}
@@ -114,17 +84,21 @@ export default function GuarantorInformation(props) {
           <TextField
             required
             size="small"
-            label="Relationship"
+            label="Address line 2"
+            placeholder="Address line 2"
             variant="outlined"
-            name="guarantorContactRelationship"
+            name="address_line_2"
             fullWidth
-            defaultValue={formState.guarantorContactRelationship}
+            defaultValue={formState.address_line_2}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -132,16 +106,20 @@ export default function GuarantorInformation(props) {
             required
             size="small"
             label="City"
+            placeholder="City"
             variant="outlined"
-            name="guarantorContactCity"
+            name="city"
             fullWidth
-            defaultValue={formState.guarantorContactCity}
+            defaultValue={formState.city}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -149,33 +127,41 @@ export default function GuarantorInformation(props) {
             required
             size="small"
             label="State/Province"
+            placeholder="State/Province"
             variant="outlined"
-            name="guarantorContactState"
+            name="state"
             fullWidth
-            defaultValue={formState.guarantorContactState}
+            defaultValue={formState.state}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
             required
             size="small"
-            label="Postal / Zip Code"
+            label="Postal/Zip Code"
+            placeholder="Postal/Zip Code"
             variant="outlined"
-            name="guarantorContactZip"
+            name="postcode"
             fullWidth
-            defaultValue={formState.guarantorContactZip}
+            defaultValue={formState.postcode}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
       </Grid>

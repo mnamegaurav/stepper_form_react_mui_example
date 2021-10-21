@@ -18,21 +18,24 @@ export default function AccommodationInformation(props) {
         <Grid item xs={12} md={12}>
           <TextField
             required
-            size="small"
+            size="medium"
             multiline
-            label="If you are booking with other people, write name and email ids of all people"
+            label="Email Ids"
+            placeholder="If you are booking with other people, write name and email ids of all people. e.g. Peter Parker:peterparker@gmail.com"
             variant="outlined"
-            name="emailsIdsOfAllPeople"
-            defaultValue={formState.emailsIdsOfAllPeople}
+            name="booking_others"
+            defaultValue={formState.booking_others}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
-            placeholder="e.g. Peter Parker:peterparker@gmail.com"
-            rows={4}
+            rows={5}
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -43,15 +46,15 @@ export default function AccommodationInformation(props) {
             </FormLabel>
             <RadioGroup
               row
-              aria-label="howLongToStay"
-              name="howLongToStay"
-              defaultValue={formState.howLongToStay}
+              aria-label="length_of_stay_choices"
+              name="length_of_stay_choices"
+              defaultValue={formState.length_of_stay_choices}
               onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
+                handleInputChange({
+                  fieldName: event.target.name,
+                  fieldValue: event.target.value,
+                })
+              }
               required
             >
               <FormControlLabel
@@ -74,15 +77,15 @@ export default function AccommodationInformation(props) {
                 size="small"
                 label="Other length of stay"
                 variant="filled"
-                name="otherLengthOfStay"
-                disabled={parseInt(formState.howLongToStay) !== 1}
-                defaultValue={formState.otherLengthOfStay}
+                name="length_of_stay_other"
+                disabled={parseInt(formState.length_of_stay_choices) !== 1}
+                defaultValue={formState.length_of_stay_other}
                 onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
+                  handleInputChange({
+                    fieldName: event.target.name,
+                    fieldValue: event.target.value,
+                  })
+                }
               />
             </RadioGroup>
           </FormControl>
@@ -90,7 +93,7 @@ export default function AccommodationInformation(props) {
         <Grid item xs={12} md={12}>
           <TextField
             required
-            size="small"
+            size="medium"
             label="When do you wish to move in to this accommodation?"
             variant="outlined"
             onChange={(event) =>
@@ -99,10 +102,10 @@ export default function AccommodationInformation(props) {
                 fieldValue: event.target.value,
               })
             }
-            name="moveInDate"
+            name="move_in_date"
             type="date"
             fullWidth
-            defaultValue={formState.moveInDate || new Date()}
+            defaultValue={formState.move_in_date}
             InputLabelProps={{
               shrink: true,
             }}
@@ -111,17 +114,21 @@ export default function AccommodationInformation(props) {
         <Grid item xs={12} md={12}>
           <TextField
             required
-            size="small"
-            label="Which room type would you like to book in the selected accommodation?"
+            size="medium"
+            label="Room Type"
+            placeholder="Which room type would you like to book in the selected accommodation?"
             variant="outlined"
-            name="roomType"
-            defaultValue={formState.roomType}
+            name="room_type"
+            defaultValue={formState.room_type}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
             fullWidth
           />
         </Grid>
@@ -133,15 +140,15 @@ export default function AccommodationInformation(props) {
             </FormLabel>
             <RadioGroup
               row
-              aria-label="isMedicalConditionOrDisability"
-              name="isMedicalConditionOrDisability"
-              defaultValue={formState.isMedicalConditionOrDisability}
+              aria-label="medical_condition"
+              name="medical_condition"
+              defaultValue={formState.medical_condition}
               onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
+                handleInputChange({
+                  fieldName: event.target.name,
+                  fieldValue: event.target.value,
+                })
+              }
               required
             >
               <FormControlLabel value="1" control={<Radio />} label="Yes" />
@@ -153,18 +160,22 @@ export default function AccommodationInformation(props) {
           <TextField
             size="small"
             multiline
-            label="Any special requirements?"
+            label="Special requirements?"
+            placeholder="Any special requirements?"
             variant="outlined"
-            name="specialRequirements"
-            defaultValue={formState.specialRequirements}
+            name="special_requirements"
+            defaultValue={formState.special_requirements}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
-            rows={4}
+            rows={5}
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
       </Grid>

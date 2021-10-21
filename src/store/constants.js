@@ -1,0 +1,10 @@
+export const NEXT_STEP = "NEXT_STEP";
+export const PREVIOUS_STEP = "PREVIOUS_STEP";
+export const RESET_STEP = "RESET_STEP";
+
+export const UI_LOADING_START = "UI_LOADING_START";
+export const UI_LOADING_END = "UI_LOADING_END";
+
+export const INPUT_CHANGE = "INPUT_CHANGE";
+export const FORM_SUBMIT_SUCCESS = "FORM_SUBMIT_SUCCESS";
+export const FORM_SUBMIT_FAILED = "FORM_SUBMIT_FAILED";

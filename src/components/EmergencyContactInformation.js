@@ -7,11 +7,19 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
+  InputAdornment,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 import PhoneInput from "react-phone-input-2";
 
+import { useStore } from "../store";
+
 export default function EmergencyContactInformation(props) {
   const { formState, handleInputChange } = props;
+
+  const [state] = useStore();
+  const { personTitles } = state;
 
   return (
     <>
@@ -21,9 +29,10 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="Emergency contact name"
+            placeholder="Emergency contact name"
             variant="outlined"
-            name="emergencyContactName"
-            defaultValue={formState.emergencyContactName}
+            name="emergency_name"
+            defaultValue={formState.emergency_name}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
@@ -31,6 +40,34 @@ export default function EmergencyContactInformation(props) {
               })
             }
             fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Select
+                    name="emergency_salutation"
+                    style={{ background: "transparent" }}
+                    variant="standard"
+                    size="small"
+                    value={personTitles[0].value}
+                    onChange={(event) =>
+                      handleInputChange({
+                        fieldName: event.target.name,
+                        fieldValue: event.target.value,
+                      })
+                    }
+                  >
+                    {personTitles.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -44,17 +81,18 @@ export default function EmergencyContactInformation(props) {
               minWidth: "0",
               background: "transparent",
             }}
+            country={"gb"}
             specialLabel="Emergency Mobile Number"
             placeholder="Emergency Mobile Number"
             required
             size="small"
             label="Emergency Mobile Number"
             variant="outlined"
-            name="emergencyMobileNumber"
-            value={formState.emergencyMobileNumber}
+            name="emergency_mobile"
+            value={formState.emergency_mobile}
             onChange={(value) =>
               handleInputChange({
-                fieldName: "emergencyMobileNumber",
+                fieldName: "emergency_mobile",
                 fieldValue: value,
               })
             }
@@ -66,16 +104,20 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="Address line 1"
+            placeholder="Address line 1"
             variant="outlined"
-            name="emergencyContactAddressLine1"
+            name="emergency_address_line_1"
             fullWidth
-            defaultValue={formState.emergencyContactAddressLine1}
+            defaultValue={formState.emergency_address_line_1}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -83,16 +125,20 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="Address line 2"
+            placeholder="Address line 2"
             variant="outlined"
-            name="emergencyContactAddressLine2"
+            name="emergency_address_line_2"
             fullWidth
-            defaultValue={formState.emergencyContactAddressLine2}
+            defaultValue={formState.emergency_address_line_2}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -106,12 +152,12 @@ export default function EmergencyContactInformation(props) {
               })
             }
             id="date"
-            name="emergencyContactDob"
+            name="emergency_dob"
             label="Date Of Birth"
             type="date"
             fullWidth
             variant="outlined"
-            defaultValue={formState.emergencyContactDob || new Date()}
+            defaultValue={formState.emergency_dob}
             InputLabelProps={{
               shrink: true,
             }}
@@ -122,16 +168,20 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="Relationship"
+            placeholder="Relationship"
             variant="outlined"
-            name="emergencyContactRelationship"
+            name="emergency_relationship"
             fullWidth
-            defaultValue={formState.emergencyContactRelationship}
+            defaultValue={formState.emergency_relationship}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -139,16 +189,20 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="City"
+            placeholder="City"
             variant="outlined"
-            name="emergencyContactCity"
+            name="emergency_city"
             fullWidth
-            defaultValue={formState.emergencyContactCity}
+            defaultValue={formState.emergency_city}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -156,33 +210,41 @@ export default function EmergencyContactInformation(props) {
             required
             size="small"
             label="State/Province"
+            placeholder="State/Province"
             variant="outlined"
-            name="emergencyContactState"
+            name="emergency_state"
             fullWidth
-            defaultValue={formState.emergencyContactState}
+            defaultValue={formState.emergency_state}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
             required
             size="small"
-            label="Postal / Zip Code"
+            label="Postal/Zip Code"
+            placeholder="Postal/Zip Code"
             variant="outlined"
-            name="emergencyContactZip"
+            name="emergency_postcode"
             fullWidth
-            defaultValue={formState.emergencyContactZip}
+            defaultValue={formState.emergency_postcode}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -192,9 +254,8 @@ export default function EmergencyContactInformation(props) {
             </FormLabel>
             <RadioGroup
               row
-              aria-label="gender"
-              name="gender"
-              defaultValue={formState.isGuarantorDifferenceFromEmergencyContact}
+              name="guarantor_different"
+              defaultValue={formState.guarantor_different}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

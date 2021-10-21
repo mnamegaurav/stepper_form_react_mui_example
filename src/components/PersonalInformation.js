@@ -7,11 +7,19 @@ import {
   FormLabel,
   FormControlLabel,
   Radio,
+  Select,
+  MenuItem,
+  InputAdornment,
+  InputBase
 } from "@material-ui/core";
 
+import { useStore } from "../store";
 
 export default function PersonalInformation(props) {
   const { formState, handleInputChange } = props;
+
+  const [state] = useStore();
+  const { personTitles } = state;
 
   return (
     <>
@@ -21,16 +29,45 @@ export default function PersonalInformation(props) {
             required
             size="small"
             label="First Name"
+            placeholder="First Name"
             variant="outlined"
-            name="firstName"
-            defaultValue={formState.firstName}
+            name="first_name"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
+            defaultValue={formState.first_name}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
                 fieldValue: event.target.value,
               })
             }
-            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Select
+                    name="title"
+                    style={{ background: "transparent" }}
+                    variant="standard"
+                    size="small"
+                    value={personTitles[0].value}
+                    onChange={(event) =>
+                      handleInputChange({
+                        fieldName: event.target.name,
+                        fieldValue: event.target.value,
+                      })
+                    }
+                  >
+                    {personTitles.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </InputAdornment>
+              ),
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -38,10 +75,14 @@ export default function PersonalInformation(props) {
             required
             size="small"
             label="Last Name"
+            placeholder="Last Name"
             variant="outlined"
-            name="lastName"
+            name="last_name"
             fullWidth
-            defaultValue={formState.lastName}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            defaultValue={formState.last_name}
             onChange={(event) =>
               handleInputChange({
                 fieldName: event.target.name,
@@ -66,7 +107,7 @@ export default function PersonalInformation(props) {
             type="date"
             fullWidth
             variant="outlined"
-            defaultValue={formState.dob || new Date()}
+            defaultValue={formState.dob}
             InputLabelProps={{
               shrink: true,
             }}
@@ -81,11 +122,11 @@ export default function PersonalInformation(props) {
               name="gender"
               defaultValue={formState.gender}
               onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
+                handleInputChange({
+                  fieldName: event.target.name,
+                  fieldValue: event.target.value,
+                })
+              }
             >
               <FormControlLabel
                 value="female"
@@ -106,6 +147,7 @@ export default function PersonalInformation(props) {
             required
             size="small"
             label="Nationality"
+            placeholder="Nationality"
             variant="outlined"
             name="nationality"
             fullWidth
@@ -116,6 +158,9 @@ export default function PersonalInformation(props) {
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -123,6 +168,7 @@ export default function PersonalInformation(props) {
             required
             size="small"
             label="Country"
+            placeholder="Country"
             variant="outlined"
             name="country"
             fullWidth
@@ -133,6 +179,9 @@ export default function PersonalInformation(props) {
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
       </Grid>

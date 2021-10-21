@@ -3,13 +3,18 @@ import {
   Grid,
   TextField,
   MenuItem,
-  FormControl,
   Select,
+  FormControl,
   InputLabel,
 } from "@material-ui/core";
 
+import { useStore } from "../store";
+
 export default function CourseInformation(props) {
   const { formState, handleInputChange } = props;
+
+  const [state] = useStore();
+  const { enrollmentStatuses } = state;
 
   return (
     <>
@@ -17,8 +22,9 @@ export default function CourseInformation(props) {
         <Grid item xs={12}>
           <TextField
             required
-            size="small"
-            label="Which University are you going to attend?"
+            size="medium"
+            label="University Name"
+            placeholder="Which University are you going to attend?"
             variant="outlined"
             name="university"
             defaultValue={formState.university}
@@ -28,14 +34,18 @@ export default function CourseInformation(props) {
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
             fullWidth
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            size="small"
-            label="Which course are you going to take?"
+            size="medium"
+            label="Course Name"
+            placeholder="Which course are you going to take?"
             variant="outlined"
             name="course"
             fullWidth
@@ -46,35 +56,39 @@ export default function CourseInformation(props) {
                 fieldValue: event.target.value,
               })
             }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">
-              Enrollment Status (for the next academic year)
-            </InputLabel>
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel id="enrolmentStatus">Enrollment Status</InputLabel>
             <Select
-              size="small"
-              labelId="demo-simple-select-label"
+              inputProps={{
+                size: "medium"
+              }}
               label="Enrollment Status (for the next academic year)"
               variant="outlined"
-              name="enrollmentStatus"
+              name="enrolment_status"
               fullWidth
-              defaultValue={formState.enrollmentStatus}
+              value={formState.enrolment_status || ""}
               onChange={(event) =>
-              handleInputChange({
-                fieldName: event.target.name,
-                fieldValue: event.target.value,
-              })
-            }
+                handleInputChange({
+                  fieldName: event.target.name,
+                  fieldValue: event.target.value,
+                })
+              }
+              inputlabelprops={{
+                shrink: true,
+              }}
               required
             >
-              <MenuItem value={1}>First Year Undergraduate</MenuItem>
-              <MenuItem value={2}>Non-Student</MenuItem>
-              <MenuItem value={3}>Nurse</MenuItem>
-              <MenuItem value={3}>Graduate</MenuItem>
-              <MenuItem value={3}>Second Year Graduate</MenuItem>
-              <MenuItem value={3}>Third Year or Above Graduate</MenuItem>
+              {enrollmentStatuses.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>

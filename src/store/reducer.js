@@ -41,6 +41,10 @@ export const initialState = {
       label: "Third Year or Above Graduate",
     },
   ],
+  yes_no_choices: [
+    { value: "Yes", label: "Yes" },
+    { value: "No", label: "No" },
+  ],
   formData: {
     title: null,
     first_name: "",

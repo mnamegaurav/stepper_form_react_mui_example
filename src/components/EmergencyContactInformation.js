@@ -19,7 +19,7 @@ export default function EmergencyContactInformation(props) {
   const { formState, handleInputChange } = props;
 
   const [state] = useStore();
-  const { personTitles } = state;
+  const { personTitles, yes_no_choices } = state;
 
   return (
     <>
@@ -51,7 +51,8 @@ export default function EmergencyContactInformation(props) {
                     style={{ background: "transparent" }}
                     variant="standard"
                     size="small"
-                    value={personTitles[0].value}
+                    displayEmpty
+                    value={formState.emergency_salutation || ""}
                     onChange={(event) =>
                       handleInputChange({
                         fieldName: event.target.name,
@@ -59,6 +60,9 @@ export default function EmergencyContactInformation(props) {
                       })
                     }
                   >
+                    <MenuItem value="" disabled>
+                      Title
+                    </MenuItem>
                     {personTitles.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
@@ -264,8 +268,14 @@ export default function EmergencyContactInformation(props) {
               }
               required
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
+              {yes_no_choices.map((choice) => (
+                <FormControlLabel
+                  key={choice.value}
+                  value={choice.value}
+                  control={<Radio />}
+                  label={choice.label}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
         </Grid>

@@ -1,7 +1,11 @@
 import React from "react";
-import { Grid, TextField,InputAdornment,
-Select,
-MenuItem, } from "@material-ui/core";
+import {
+  Grid,
+  TextField,
+  InputAdornment,
+  Select,
+  MenuItem,
+} from "@material-ui/core";
 import PhoneInput from "react-phone-input-2";
 
 import { useStore } from "../store";
@@ -9,8 +13,8 @@ import { useStore } from "../store";
 export default function GuarantorInformation(props) {
   const { formState, handleInputChange } = props;
 
-  const [state] = useStore()
-  const {personTitles } = state
+  const [state] = useStore();
+  const { personTitles } = state;
 
   return (
     <>
@@ -42,7 +46,8 @@ export default function GuarantorInformation(props) {
                     style={{ background: "transparent" }}
                     variant="standard"
                     size="small"
-                    value={personTitles[0].value}
+                    displayEmpty
+                    value={formState.guarantor_salutation || ""}
                     onChange={(event) =>
                       handleInputChange({
                         fieldName: event.target.name,
@@ -50,6 +55,9 @@ export default function GuarantorInformation(props) {
                       })
                     }
                   >
+                    <MenuItem value="" disabled>
+                      Title
+                    </MenuItem>
                     {personTitles.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}

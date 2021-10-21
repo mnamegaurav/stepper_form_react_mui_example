@@ -9,8 +9,13 @@ import {
   Radio,
 } from "@material-ui/core";
 
+import { useStore } from "../store";
+
 export default function AccommodationInformation(props) {
   const { formState, handleInputChange } = props;
+
+  const [state] = useStore();
+  const { lengthOfStayChoices, yes_no_choices } = state;
 
   return (
     <>
@@ -48,7 +53,9 @@ export default function AccommodationInformation(props) {
               row
               aria-label="length_of_stay_choices"
               name="length_of_stay_choices"
-              value={formState.length_of_stay_choices}
+              value={
+                formState.length_of_stay_choices || lengthOfStayChoices[0].value
+              }
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,
@@ -57,28 +64,21 @@ export default function AccommodationInformation(props) {
               }
               required
             >
-              <FormControlLabel
-                value="2"
-                control={<Radio />}
-                label="8-12 Weeks"
-              />
-              <FormControlLabel
-                value="3"
-                control={<Radio />}
-                label="44 Weeks"
-              />
-              <FormControlLabel
-                value="4"
-                control={<Radio />}
-                label="51 Weeks"
-              />
-              <FormControlLabel value="1" control={<Radio />} label="Other" />
+              {lengthOfStayChoices.map((lengthOfStayChoice) => (
+                <FormControlLabel
+                  key={lengthOfStayChoice.value}
+                  value={lengthOfStayChoice.value}
+                  control={<Radio />}
+                  label={lengthOfStayChoice.label}
+                />
+              ))}
+              <FormControlLabel control={<Radio />} label="Other" />
               <TextField
                 size="small"
                 label="Other length of stay"
                 variant="filled"
                 name="length_of_stay_other"
-                disabled={parseInt(formState.length_of_stay_choices) !== 1}
+                disabled={parseInt(formState.length_of_stay_choices) === null}
                 defaultValue={formState.length_of_stay_other}
                 onChange={(event) =>
                   handleInputChange({
@@ -151,8 +151,14 @@ export default function AccommodationInformation(props) {
               }
               required
             >
-              <FormControlLabel value="1" control={<Radio />} label="Yes" />
-              <FormControlLabel value="2" control={<Radio />} label="No" />
+              {yes_no_choices.map((choice) => (
+                <FormControlLabel
+                  key={choice.value}
+                  value={choice.value}
+                  control={<Radio />}
+                  label={choice.label}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
         </Grid>

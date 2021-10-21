@@ -18,7 +18,7 @@ export default function PersonalInformation(props) {
   const { formState, handleInputChange } = props;
 
   const [state] = useStore();
-  const { personTitles } = state;
+  const { personTitles, genders } = state;
 
   return (
     <>
@@ -50,7 +50,8 @@ export default function PersonalInformation(props) {
                     style={{ background: "transparent" }}
                     variant="standard"
                     size="small"
-                    value={personTitles[0].value}
+                    value={formState.title || ""}
+                    displayEmpty
                     onChange={(event) =>
                       handleInputChange({
                         fieldName: event.target.name,
@@ -58,6 +59,9 @@ export default function PersonalInformation(props) {
                       })
                     }
                   >
+                    <MenuItem value="" disabled>
+                      Title
+                    </MenuItem>
                     {personTitles.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
@@ -127,17 +131,14 @@ export default function PersonalInformation(props) {
                 })
               }
             >
-              <FormControlLabel
-                value="female"
-                control={<Radio />}
-                label="Female"
-              />
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel
-                value="other"
-                control={<Radio />}
-                label="Other"
-              />
+              {genders.map((gender) => (
+                <FormControlLabel
+                  key={gender.value}
+                  value={gender.value}
+                  control={<Radio />}
+                  label={gender.label}
+                />
+              ))}
             </RadioGroup>
           </FormControl>
         </Grid>

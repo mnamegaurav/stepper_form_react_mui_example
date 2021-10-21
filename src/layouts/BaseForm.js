@@ -79,7 +79,12 @@ export default function BaseForm(props) {
     axios
       .post(
         "http://localhost:8000/booking-form/api/booking/create/",
-        JSON.stringify(formData)
+        JSON.stringify(formData),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((res) => {
         //Show the alert

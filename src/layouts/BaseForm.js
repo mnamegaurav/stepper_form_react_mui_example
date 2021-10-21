@@ -11,8 +11,18 @@ import CourseInformation from "../components/CourseInformation";
 import EmergencyContactInformation from "../components/EmergencyContactInformation";
 import GuarantorInformation from "../components/GuarantorInformation";
 import AccommodationInformation from "../components/AccommodationInformation";
-import { NEXT_STEP, PREVIOUS_STEP, INPUT_CHANGE } from "../store/constants";
+import {
+  NEXT_STEP,
+  PREVIOUS_STEP,
+  INPUT_CHANGE,
+  UI_LOADING_START,
+  UI_LOADING_END,
+  FORM_SUBMIT_SUCCESS,
+  FORM_SUBMIT_FAILED,
+} from "../store/constants";
 import { useStore } from "../store";
+import axios from "axios";
+import { ErrorRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   responsiveButtonGroup: {
@@ -47,6 +57,50 @@ export default function BaseForm(props) {
       type: INPUT_CHANGE,
       payload: { [fieldName]: fieldValue },
     });
+  };
+
+  const handleNext = () => {
+    if (!formRef.current.checkValidity()) {
+      return;
+    }
+    dispatch({ type: NEXT_STEP });
+  };
+
+  const handleBack = () => {
+    dispatch({ type: PREVIOUS_STEP });
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log("submit");
+    console.log(formData);
+    dispatch({
+      type: UI_LOADING_START,
+    });
+    // axios
+    //   .post("booking/api/booking/create/", JSON.stringify(formData))
+    //   .then((res) => {
+    //     //Show the alert
+    //     console.log(res);
+    //     dispatch({
+    //       type: FORM_SUBMIT_SUCCESS,
+    //     });
+    //     // End Loading the UI
+    //     dispatch({
+    //       type: UI_LOADING_END,
+    //     });
+    //     handleNext()
+    //   })
+    //   .catch((err) => {
+    //     console.log(ErrorRounded);
+    //     dispatch({
+    //       type: FORM_SUBMIT_FAILED,
+    //     });
+    //     // End Loading the UI
+    //     dispatch({
+    //       type: UI_LOADING_END,
+    //     });
+    //   });
   };
 
   const renderForm = (activeStep) => {
@@ -96,48 +150,6 @@ export default function BaseForm(props) {
       default:
         return <Typography>Some Error Found</Typography>;
     }
-  };
-
-  const handleNext = () => {
-    // if (!formRef.current.checkValidity()) {
-    //   return;
-    // }
-    dispatch({ type: NEXT_STEP });
-  };
-
-  const handleBack = () => {
-    dispatch({ type: PREVIOUS_STEP });
-  };
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    console.log("submit");
-    console.log(formRef);
-    console.log(formData);
-    // dispatch({
-    //   type: UI_LOADING_START,
-    // });
-    // axios
-    //   .post("booking/api/booking/create/", JSON.stringify(formState))
-    //   .then((res) => {
-    //     //Show the alert
-    //     dispatch({
-    //       type: FORM_SUBMIT_SUCCESS,
-    //     });
-    //     // End Loading the UI
-    //     dispatch({
-    //       type: UI_LOADING_END,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     dispatch({
-    //       type: FORM_SUBMIT_FAILED,
-    //     });
-    //     // End Loading the UI
-    //     dispatch({
-    //       type: UI_LOADING_END,
-    //     });
-    //   });
   };
 
   const nextButton = () => (

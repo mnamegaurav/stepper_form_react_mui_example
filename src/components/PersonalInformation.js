@@ -119,7 +119,7 @@ export default function PersonalInformation(props) {
               row
               aria-label="gender"
               name="gender"
-              defaultValue={formState.gender}
+              value={formState.gender}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

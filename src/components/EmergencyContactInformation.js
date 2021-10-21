@@ -255,7 +255,7 @@ export default function EmergencyContactInformation(props) {
             <RadioGroup
               row
               name="guarantor_different"
-              defaultValue={formState.guarantor_different}
+              value={formState.guarantor_different}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

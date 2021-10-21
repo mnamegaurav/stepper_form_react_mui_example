@@ -11,6 +11,7 @@ import {
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
 
+import UiLoader from "./layouts/UiLoader";
 import { theme } from "./themes";
 
 const muiTheme = createMuiTheme(theme);
@@ -20,6 +21,7 @@ ReactDOM.render(
     <StoreProvider>
       <MuiThemeProvider theme={muiTheme}>
         <CssBaseline />
+        <UiLoader />
         <App />
       </MuiThemeProvider>
     </StoreProvider>

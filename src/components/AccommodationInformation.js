@@ -48,7 +48,7 @@ export default function AccommodationInformation(props) {
               row
               aria-label="length_of_stay_choices"
               name="length_of_stay_choices"
-              defaultValue={formState.length_of_stay_choices}
+              value={formState.length_of_stay_choices}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,
@@ -142,7 +142,7 @@ export default function AccommodationInformation(props) {
               row
               aria-label="medical_condition"
               name="medical_condition"
-              defaultValue={formState.medical_condition}
+              value={formState.medical_condition}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

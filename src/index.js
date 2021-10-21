@@ -5,11 +5,23 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import StoreProvider from "./store";
+import { CssBaseline } from "@material-ui/core";
+import {
+  unstable_createMuiStrictModeTheme as createMuiTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@material-ui/core/styles";
+
+import { theme } from "./themes";
+
+const muiTheme = createMuiTheme(theme);
 
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider>
-      <App />
+      <MuiThemeProvider theme={muiTheme}>
+        <CssBaseline />
+        <App />
+      </MuiThemeProvider>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")

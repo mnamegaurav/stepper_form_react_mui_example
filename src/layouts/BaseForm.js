@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     [theme.breakpoints.up("md")]: {},
   },
+  formContainerBox: {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 export default function BaseForm(props) {
@@ -173,17 +177,17 @@ export default function BaseForm(props) {
   );
 
   return (
-    <Box>
-      <Container>
-        <form ref={formRef} method="POST" onSubmit={handleFormSubmit}>
+    <Container>
+      <form ref={formRef} method="POST" onSubmit={handleFormSubmit}>
+        <Box className={classes.formContainerBox}>
           {children}
           <Box my={3}>{renderForm(activeStep)}</Box>
           <Box mt={3} className={classes.responsiveButtonGroup}>
             {backButton()}
             {nextButton()}
           </Box>
-        </form>
-      </Container>
-    </Box>
+        </Box>
+      </form>
+    </Container>
   );
 }

@@ -49,6 +49,12 @@ const useStyles = makeStyles((theme) => ({
     },
     display: "none",
   },
+  formPaper: {
+    background: "#f9f9f9e0",
+    minHeight: "100%",
+    display: "flex",
+    alignItems: "center",
+  },
 }));
 
 export default function App() {
@@ -81,13 +87,13 @@ export default function App() {
             </Paper>
           </Grid>
           <Grid item md={8} xl={9}>
-            <Paper variant="outlined" style={{ background: "#f9f9f9e0" }}>
-              <Box py={3}>
+            <Paper variant="outlined" className={classes.formPaper}>
+              <Box py={3} style={{ width: "100%" }}>
                 {activeStep === steps.length ? (
                   <Success />
                 ) : (
                   <BaseForm>
-                    <Box className={classes.mobileOnly}>
+                    <Box className={classes.mobileOnly} mb={3}>
                       <MobileStepper
                         variant="dots"
                         steps={steps.length}

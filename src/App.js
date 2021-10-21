@@ -65,7 +65,11 @@ export default function App() {
   return (
     <Box>
       <Box style={{ textAlign: "center" }} mt={7} mb={5}>
-        <img alt="bsh" src="bsh_logo.png" className={classes.bshLogo} />
+        <img
+          alt="bsh"
+          src="https://beststudenthalls.com/static/images/a_logo%402x.png"
+          className={classes.bshLogo}
+        />
       </Box>
       <Container>
         <Grid container spacing={4} className={classes.container}>

@@ -51,12 +51,16 @@ export default function ContactInformation(props) {
             name="mobile_number"
             fullWidth
             value={formState.mobile_number}
-            onChange={(value) =>
+            onChange={(value, country) =>{
+              handleInputChange({
+                fieldName: "mobile_country",
+                fieldValue: country.countryCode,
+              });
               handleInputChange({
                 fieldName: "mobile_number",
                 fieldValue: value,
               })
-            }
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>

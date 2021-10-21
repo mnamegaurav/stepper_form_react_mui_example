@@ -22,7 +22,6 @@ import {
 } from "../store/constants";
 import { useStore } from "../store";
 import axios from "axios";
-import { ErrorRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   responsiveButtonGroup: {
@@ -78,7 +77,10 @@ export default function BaseForm(props) {
       type: UI_LOADING_START,
     });
     axios
-      .post("booking/api/booking/create/", JSON.stringify(formData))
+      .post(
+        "http://localhost:8000/booking-form/api/booking/create/",
+        JSON.stringify(formData)
+      )
       .then((res) => {
         //Show the alert
         console.log(res);
@@ -92,7 +94,7 @@ export default function BaseForm(props) {
         handleNext();
       })
       .catch((err) => {
-        console.log(ErrorRounded);
+        console.log(err);
         dispatch({
           type: FORM_SUBMIT_FAILED,
         });

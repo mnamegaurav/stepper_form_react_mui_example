@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "react-phone-input-2/lib/material.css";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -21,7 +22,6 @@ import {
   FORM_SUBMIT_FAILED,
 } from "../store/constants";
 import { useStore } from "../store";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   responsiveButtonGroup: {
@@ -58,22 +58,27 @@ export default function BaseForm(props) {
     });
   };
 
-  const handleNext = () => {
+  const handleNext = (event) => {
+    event.preventDefault();
+    console.log(formData);
     if (!formRef.current.checkValidity()) {
       return;
+    } else {
+      if(activeStep === steps.length - 1) {
+        handleFormSubmit();
+      } else {
+        dispatch({ type: NEXT_STEP });
+      }
     }
-    dispatch({ type: NEXT_STEP });
   };
 
   const handleBack = () => {
     dispatch({ type: PREVIOUS_STEP });
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+  const handleFormSubmit = () => {
     console.log("submit");
     console.log(formData);
-    handleNext()
     dispatch({
       type: UI_LOADING_START,
     });
@@ -162,7 +167,6 @@ export default function BaseForm(props) {
 
   const nextButton = () => (
     <Button
-      onClick={activeStep === steps.length - 1 ? () => {} : handleNext}
       disableElevation
       variant="contained"
       color="primary"
@@ -198,7 +202,7 @@ export default function BaseForm(props) {
 
   return (
     <Container>
-      <form ref={formRef} method="POST" onSubmit={handleFormSubmit}>
+      <form ref={formRef} method="POST" onSubmit={handleNext}>
         <Box className={classes.formContainerBox}>
           {children}
           <Box my={3}>{renderForm(activeStep)}</Box>

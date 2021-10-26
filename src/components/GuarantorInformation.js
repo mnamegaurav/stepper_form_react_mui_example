@@ -21,7 +21,7 @@ export default function GuarantorInformation(props) {
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="Guarantor contact name"
             placeholder="Guarantor contact name"
@@ -80,14 +80,16 @@ export default function GuarantorInformation(props) {
               minWidth: "0",
               background: "transparent",
             }}
+            inputProps={{
+              required: formState.guarantor_different === "Yes",
+              name: "guarantor_mobile",
+              label: "Guarantor Mobile Number",
+            }}
             specialLabel="Guarantor Mobile Number"
             placeholder="Guarantor Mobile Number"
-            required
             country={"gb"}
             size="small"
-            label="Guarantor Mobile Number"
             variant="outlined"
-            name="guarantor_mobile"
             value={formState.guarantor_mobile}
             onChange={(value) =>
               handleInputChange({
@@ -100,7 +102,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="Address line 1"
             placeholder="Address line 1"
@@ -121,7 +123,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="Address line 2"
             placeholder="Address line 2"
@@ -142,7 +144,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             onChange={(event) =>
               handleInputChange({
@@ -164,7 +166,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="Relationship"
             placeholder="Relationship"
@@ -185,7 +187,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="City"
             placeholder="City"
@@ -206,7 +208,6 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
-            required
             size="small"
             label="State/Province"
             placeholder="State/Province"
@@ -227,7 +228,7 @@ export default function GuarantorInformation(props) {
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
-            required
+            required={formState.guarantor_different === "Yes"}
             size="small"
             label="Postal/Zip Code"
             placeholder="Postal/Zip Code"

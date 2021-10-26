@@ -41,17 +41,20 @@ export default function ContactInformation(props) {
               minWidth: "0",
               background: "transparent",
             }}
-            country={"gb"}
+            inputProps={{
+              required: true,
+              label: "Mobile Number",
+              name: "mobile_number",
+            }}
+            enableSearch
             specialLabel="Mobile Number"
-            required
-            placeholder="Mobile Number"
-            size="small"
-            label="Mobile Number"
-            variant="outlined"
-            name="mobile_number"
             fullWidth
+            country={"gb"}
+            size="small"
+            variant="outlined"
+            countryCodeEditable={false}
             value={formState.mobile_number}
-            onChange={(value, country) =>{
+            onChange={(value, country) => {
               handleInputChange({
                 fieldName: "mobile_country",
                 fieldValue: country.countryCode,
@@ -59,7 +62,7 @@ export default function ContactInformation(props) {
               handleInputChange({
                 fieldName: "mobile_number",
                 fieldValue: value,
-              })
+              });
             }}
           />
         </Grid>
@@ -128,7 +131,6 @@ export default function ContactInformation(props) {
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
-            required
             size="small"
             label="State/Province"
             placeholder="State/Province"

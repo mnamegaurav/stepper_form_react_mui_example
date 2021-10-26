@@ -23,6 +23,23 @@ const useStyles = makeStyles((theme) => ({
     },
     height: "20px",
   },
+  bshLogoBox: {
+    textAlign: "center",
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(4),
+    [theme.breakpoints.up("md")]: {
+      marginTop: theme.spacing(10),
+      marginBottom: theme.spacing(15),
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(10),
+    },
+    [theme.breakpoints.up("xl")]: {
+      marginTop: theme.spacing(15),
+      marginBottom: theme.spacing(15),
+    },
+  },
   container: {
     justifyContent: "center",
   },
@@ -36,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "0",
     paddingRight: "0",
     justifyContent: "center",
+    "& .MuiMobileStepper-dotActive": {
+      backgroundColor: "#abd039",
+    },
   },
   mobileOnly: {
     [theme.breakpoints.up("md")]: {
@@ -55,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
+  stepLabel: {
+    "& .MuiStepLabel-label": {},
+    "& .MuiStepLabel-label.MuiStepLabel-active": {},
+  },
 }));
 
 export default function App() {
@@ -64,7 +88,7 @@ export default function App() {
 
   return (
     <Box>
-      <Box style={{ textAlign: "center" }} mt={7} mb={5}>
+      <Box className={classes.bshLogoBox}>
         <img
           alt="bsh"
           src="https://beststudenthalls.com/static/images/a_logo%402x.png"
@@ -83,7 +107,9 @@ export default function App() {
                 >
                   {steps.map((label, index) => (
                     <Step key={label}>
-                      <StepLabel>{label}</StepLabel>
+                      <StepLabel className={classes.stepLabel}>
+                        {label}
+                      </StepLabel>
                     </Step>
                   ))}
                 </Stepper>

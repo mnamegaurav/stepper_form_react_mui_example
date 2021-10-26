@@ -15,14 +15,14 @@ export default function Success() {
         window.clearTimeout(tID); // clear time out.
       }
     }, 1000);
-  });
+  }, [second]);
 
   return (
     <Box mx={3} style={{ display: "flex", justifyContent: "center" }}>
       <Typography variant="h5">
         Thanks for submitting your details, you will be redirected to Best
-        Student Halls in {maxSecondWait} seconds, you have {second} seconds
-        left.
+        Student Halls in {maxSecondWait} seconds, you have{" "}
+        {maxSecondWait - second} seconds left.
       </Typography>
     </Box>
   );

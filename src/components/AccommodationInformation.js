@@ -22,7 +22,6 @@ export default function AccommodationInformation(props) {
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
           <TextField
-            required
             size="medium"
             multiline
             label="Email Ids"
@@ -53,32 +52,29 @@ export default function AccommodationInformation(props) {
               row
               aria-label="length_of_stay_choices"
               name="length_of_stay_choices"
-              value={
-                formState.length_of_stay_choices || lengthOfStayChoices[0].value
-              }
-              onChange={(event) =>
-                handleInputChange({
-                  fieldName: event.target.name,
-                  fieldValue: event.target.value,
-                })
-              }
-              required
+              value={formState.length_of_stay_choices}
+              onChange={(event) => 
+                  handleInputChange({
+                    fieldName: event.target.name,
+                    fieldValue: event.target.value,
+                  })
+                }
             >
               {lengthOfStayChoices.map((lengthOfStayChoice) => (
                 <FormControlLabel
                   key={lengthOfStayChoice.value}
                   value={lengthOfStayChoice.value}
-                  control={<Radio />}
+                  control={<Radio required/>}
                   label={lengthOfStayChoice.label}
                 />
               ))}
-              <FormControlLabel control={<Radio />} label="Other" />
+              <FormControlLabel control={<Radio />} value="" label="Other" />
               <TextField
                 size="small"
                 label="Other length of stay"
                 variant="filled"
                 name="length_of_stay_other"
-                disabled={parseInt(formState.length_of_stay_choices) === null}
+                disabled={formState.length_of_stay_choices !== ""}
                 defaultValue={formState.length_of_stay_other}
                 onChange={(event) =>
                   handleInputChange({
@@ -92,7 +88,6 @@ export default function AccommodationInformation(props) {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
-            required
             size="medium"
             label="When do you wish to move in to this accommodation?"
             variant="outlined"
@@ -113,7 +108,6 @@ export default function AccommodationInformation(props) {
         </Grid>
         <Grid item xs={12} md={12}>
           <TextField
-            required
             size="medium"
             label="Room Type"
             placeholder="Which room type would you like to book in the selected accommodation?"
@@ -149,13 +143,12 @@ export default function AccommodationInformation(props) {
                   fieldValue: event.target.value,
                 })
               }
-              required
             >
               {yes_no_choices.map((choice) => (
                 <FormControlLabel
                   key={choice.value}
                   value={choice.value}
-                  control={<Radio />}
+                  control={<Radio required/>}
                   label={choice.label}
                 />
               ))}

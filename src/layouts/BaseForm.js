@@ -73,6 +73,7 @@ export default function BaseForm(props) {
     event.preventDefault();
     console.log("submit");
     console.log(formData);
+    handleNext()
     dispatch({
       type: UI_LOADING_START,
     });

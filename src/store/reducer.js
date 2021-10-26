@@ -32,14 +32,14 @@ export const initialState = {
   ],
   enrollmentStatuses: [
     { value: "First Year Undergraduate", label: "First Year Undergraduate" },
-    { value: "Non-Student", label: "Non-Student" },
-    { value: "Nurse", label: "Nurse" },
-    { value: "Graduate", label: "Graduate" },
     { value: "Second Year Graduate", label: "Second Year Graduate" },
     {
       value: "Third Year or Above Graduate",
       label: "Third Year or Above Graduate",
     },
+    { value: "Nurse", label: "Nurse" },
+    { value: "Postgraduate", label: "Postgraduate" },
+    { value: "Non-Student", label: "Non-Student" },
   ],
   yes_no_choices: [
     { value: "Yes", label: "Yes" },
@@ -101,7 +101,7 @@ export const initialState = {
     room: null,
     option: null,
   },
-  formSubmitSuccess: null,
+  formSubmitSuccess: false,
   steps: [
     "Personal Information",
     "Contact Information",

@@ -29,3 +29,8 @@ button {
 .react-tel-input .special-label {
   display: none !important;
 }
+
+.react-tel-input .form-control:focus {
+    border-color: #28bebc !important;
+    box-shadow: 0 0 0 1px #28bebc !important;
+}

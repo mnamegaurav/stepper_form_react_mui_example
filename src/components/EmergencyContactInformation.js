@@ -85,14 +85,17 @@ export default function EmergencyContactInformation(props) {
               minWidth: "0",
               background: "transparent",
             }}
+            inputProps={{
+              required: true,
+              label: "Emergency Mobile Number",
+              name: "emergency_mobile",
+            }}
+            enableSearch
+            specialLabel="Mobile Number"
+            fullWidth
             country={"gb"}
-            specialLabel="Emergency Mobile Number"
-            placeholder="Emergency Mobile Number"
-            required
             size="small"
-            label="Emergency Mobile Number"
             variant="outlined"
-            name="emergency_mobile"
             value={formState.emergency_mobile}
             onChange={(value) =>
               handleInputChange({
@@ -100,7 +103,6 @@ export default function EmergencyContactInformation(props) {
                 fieldValue: value,
               })
             }
-            fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -211,7 +213,6 @@ export default function EmergencyContactInformation(props) {
         </Grid>
         <Grid item xs={12} md={4}>
           <TextField
-            required
             size="small"
             label="State/Province"
             placeholder="State/Province"
@@ -259,7 +260,10 @@ export default function EmergencyContactInformation(props) {
             <RadioGroup
               row
               name="guarantor_different"
-              value={formState.guarantor_different}
+              value={
+                formState.guarantor_different ||
+                yes_no_choices[1].value
+              }
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

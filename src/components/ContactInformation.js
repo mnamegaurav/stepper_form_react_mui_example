@@ -8,7 +8,7 @@ export default function ContactInformation(props) {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <TextField
             required
             size="small"
@@ -42,17 +42,17 @@ export default function ContactInformation(props) {
               background: "transparent",
             }}
             inputProps={{
-              required: true,
               label: "Mobile Number",
               name: "mobile_number",
+              required: true,
             }}
             enableSearch
-            specialLabel="Mobile Number"
+            specialLabel="Mobile Number *"
             fullWidth
-            country={"gb"}
+            // country={"gb"}
             size="small"
             variant="outlined"
-            countryCodeEditable={false}
+            countryCodeEditable
             value={formState.mobile_number}
             onChange={(value, country) => {
               handleInputChange({
@@ -67,6 +67,27 @@ export default function ContactInformation(props) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
+          <TextField
+            size="small"
+            label="Telephone/Home No."
+            placeholder="Telephone/Home No."
+            variant="outlined"
+            name="home_number"
+            type="tel"
+            fullWidth
+            defaultValue={formState.home_number}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={12}>
           <TextField
             required
             size="small"
@@ -87,7 +108,7 @@ export default function ContactInformation(props) {
             }}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <TextField
             required
             size="small"

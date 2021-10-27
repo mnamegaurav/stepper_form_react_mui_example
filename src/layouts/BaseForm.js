@@ -62,11 +62,15 @@ export default function BaseForm(props) {
     event.preventDefault();
     console.log(formData);
     if (!formRef.current.checkValidity()) {
+      // check for form validity
       return;
     } else {
-      if(activeStep === steps.length - 1) {
+      // form is valid
+      if (activeStep === steps.length - 1) {
+        // if last step
         handleFormSubmit();
       } else {
+        // if not last step
         dispatch({ type: NEXT_STEP });
       }
     }
@@ -78,7 +82,6 @@ export default function BaseForm(props) {
 
   const handleFormSubmit = () => {
     console.log("submit");
-    console.log(formData);
     dispatch({
       type: UI_LOADING_START,
     });
@@ -102,7 +105,7 @@ export default function BaseForm(props) {
         dispatch({
           type: UI_LOADING_END,
         });
-        handleNext();
+        dispatch({ type: NEXT_STEP });
       })
       .catch((err) => {
         console.log(err);

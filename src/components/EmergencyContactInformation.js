@@ -47,6 +47,7 @@ export default function EmergencyContactInformation(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <Select
+                    required
                     name="emergency_salutation"
                     style={{ background: "transparent" }}
                     variant="standard"
@@ -91,9 +92,9 @@ export default function EmergencyContactInformation(props) {
               name: "emergency_mobile",
             }}
             enableSearch
-            specialLabel="Mobile Number"
+            specialLabel="Mobile Number *"
             fullWidth
-            country={"gb"}
+            // country={"gb"}
             size="small"
             variant="outlined"
             value={formState.emergency_mobile}
@@ -260,10 +261,7 @@ export default function EmergencyContactInformation(props) {
             <RadioGroup
               row
               name="guarantor_different"
-              value={
-                formState.guarantor_different ||
-                yes_no_choices[1].value
-              }
+              value={formState.guarantor_different || yes_no_choices[1].value}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,

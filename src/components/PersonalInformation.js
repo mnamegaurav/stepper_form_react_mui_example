@@ -46,6 +46,7 @@ export default function PersonalInformation(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <Select
+                    required
                     name="title"
                     style={{ background: "transparent" }}
                     variant="standard"

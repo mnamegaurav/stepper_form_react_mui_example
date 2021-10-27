@@ -74,7 +74,7 @@ export const initialState = {
     emergency_city: "",
     emergency_state: "",
     emergency_postcode: "",
-    guarantor_different: null,
+    guarantor_different: "No",
     guarantor_salutation: null,
     guarantor_name: "",
     guarantor_mobile: "",
@@ -126,10 +126,20 @@ export const reducer = (state, action) => {
       };
     }
     case NEXT_STEP:
-      return {
-        ...state,
-        activeStep: state.activeStep + 1,
-      };
+      if (
+        state.activeStep === 3 &&
+        state.formData.guarantor_different === "No"
+      ) {
+        return {
+          ...state,
+          activeStep: state.activeStep + 2,
+        };
+      } else {
+        return {
+          ...state,
+          activeStep: state.activeStep + 1,
+        };
+      }
     case PREVIOUS_STEP:
       return {
         ...state,

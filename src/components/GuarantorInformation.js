@@ -42,6 +42,7 @@ export default function GuarantorInformation(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <Select
+                    required={formState.guarantor_different === "Yes"}
                     name="guarantor_salutation"
                     style={{ background: "transparent" }}
                     variant="standard"
@@ -87,7 +88,7 @@ export default function GuarantorInformation(props) {
             }}
             specialLabel="Guarantor Mobile Number"
             placeholder="Guarantor Mobile Number"
-            country={"gb"}
+            // country={"gb"}
             size="small"
             variant="outlined"
             value={formState.guarantor_mobile}

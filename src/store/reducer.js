@@ -31,15 +31,12 @@ export const initialState = {
     { value: "51 weeks", label: "51 weeks" },
   ],
   enrollmentStatuses: [
-    { value: "First Year Undergraduate", label: "First Year Undergraduate" },
-    { value: "Second Year Graduate", label: "Second Year Graduate" },
-    {
-      value: "Third Year or Above Graduate",
-      label: "Third Year or Above Graduate",
-    },
-    { value: "Nurse", label: "Nurse" },
     { value: "Postgraduate", label: "Postgraduate" },
-    { value: "Non-Student", label: "Non-Student" },
+    { value: "Undergraduate 1st year", label: "Undergraduate 1st year" },
+    { value: "Undergraduate 2nd year", label: "Undergraduate 2nd year" },
+    { value: "Undergraduate 3rd year", label: "Undergraduate 3rd year" },
+    { value: "Undergraduate 4th year", label: "Undergraduate 4th year" },
+    { value: "Other", label: "Other" },
   ],
   yes_no_choices: [
     { value: "Yes", label: "Yes" },

@@ -136,7 +136,7 @@ export default function PersonalInformation(props) {
                 <FormControlLabel
                   key={gender.value}
                   value={gender.value}
-                  control={<Radio />}
+                  control={<Radio required />}
                   label={gender.label}
                 />
               ))}

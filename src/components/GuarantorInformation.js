@@ -6,7 +6,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import PhoneInput from "react-phone-input-2";
+import CustomPhoneInput from "./common/CustomPhoneInput";
 
 import { useStore } from "../store";
 
@@ -71,26 +71,17 @@ export default function GuarantorInformation(props) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PhoneInput
-            inputStyle={{
-              font: "inherit",
-              width: "100%",
-              height: "1.1876em",
-              margin: "0",
-              display: "block",
-              minWidth: "0",
-              background: "transparent",
-            }}
-            inputProps={{
-              required: formState.guarantor_different === "Yes",
-              name: "guarantor_mobile",
-              label: "Guarantor Mobile Number",
-            }}
-            specialLabel="Guarantor Mobile Number"
-            placeholder="Guarantor Mobile Number"
-            // country={"gb"}
+          <CustomPhoneInput
+            required={formState.guarantor_different === "Yes"}
             size="small"
             variant="outlined"
+            label="Guarantor Mobile Number"
+            name="guarantor_mobile"
+            placeholder="Guarantor Mobile Number"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
             value={formState.guarantor_mobile}
             onChange={(value) =>
               handleInputChange({
@@ -98,7 +89,6 @@ export default function GuarantorInformation(props) {
                 fieldValue: value,
               })
             }
-            fullWidth
           />
         </Grid>
         <Grid item xs={12} md={6}>

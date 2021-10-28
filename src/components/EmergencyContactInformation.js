@@ -11,7 +11,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import PhoneInput from "react-phone-input-2";
+import CustomPhoneInput from "./common/CustomPhoneInput";
 
 import { useStore } from "../store";
 
@@ -76,27 +76,17 @@ export default function EmergencyContactInformation(props) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PhoneInput
-            inputStyle={{
-              font: "inherit",
-              width: "100%",
-              height: "1.1876em",
-              margin: "0",
-              display: "block",
-              minWidth: "0",
-              background: "transparent",
-            }}
-            inputProps={{
-              required: true,
-              label: "Emergency Mobile Number",
-              name: "emergency_mobile",
-            }}
-            enableSearch
-            specialLabel="Mobile Number *"
-            fullWidth
-            // country={"gb"}
+          <CustomPhoneInput
+            required
             size="small"
             variant="outlined"
+            label="Emergencey Mobile Number"
+            name="emergency_mobile"
+            placeholder="Emergencey Mobile Number"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
             value={formState.emergency_mobile}
             onChange={(value) =>
               handleInputChange({

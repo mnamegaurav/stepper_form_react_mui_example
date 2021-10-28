@@ -71,7 +71,7 @@ export const initialState = {
     emergency_city: "",
     emergency_state: "",
     emergency_postcode: "",
-    guarantor_different: "No",
+    guarantor_different: null,
     guarantor_salutation: null,
     guarantor_name: "",
     guarantor_mobile: "",
@@ -89,7 +89,6 @@ export const initialState = {
     room_type: "",
     medical_condition: null,
     special_requirements: "",
-    date: null,
   },
   formSubmitSuccess: false,
   steps: [

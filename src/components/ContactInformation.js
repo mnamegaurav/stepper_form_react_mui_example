@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, TextField } from "@material-ui/core";
-import PhoneInput from "react-phone-input-2";
+import CustomPhoneInput from "./common/CustomPhoneInput";
 
 export default function ContactInformation(props) {
   const { formState, handleInputChange } = props;
@@ -31,39 +31,24 @@ export default function ContactInformation(props) {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PhoneInput
-            inputStyle={{
-              font: "inherit",
-              width: "100%",
-              height: "1.1876em",
-              margin: "0",
-              display: "block",
-              minWidth: "0",
-              background: "transparent",
-            }}
-            inputProps={{
-              label: "Mobile Number",
-              name: "mobile_number",
-              required: true,
-            }}
-            enableSearch
-            specialLabel="Mobile Number *"
-            fullWidth
-            // country={"gb"}
+          <CustomPhoneInput
+            required
             size="small"
             variant="outlined"
-            countryCodeEditable
+            label="Mobile Number"
+            name="mobile_number"
+            placeholder="Mobile Number"
+            fullWidth
+            InputLabelProps={{
+              shrink: true,
+            }}
             value={formState.mobile_number}
-            onChange={(value, country) => {
-              handleInputChange({
-                fieldName: "mobile_country",
-                fieldValue: country.countryCode,
-              });
+            onChange={(value) =>
               handleInputChange({
                 fieldName: "mobile_number",
                 fieldValue: value,
-              });
-            }}
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>

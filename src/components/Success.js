@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box } from "@material-ui/core";
 
-const maxSecondWait = 10;
+const maxSecondWait = 5;
 
 export default function Success() {
   const [second, setSecond] = React.useState(0);

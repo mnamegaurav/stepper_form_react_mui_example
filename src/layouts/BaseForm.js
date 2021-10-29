@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import "react-phone-input-2/lib/material.css";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import { Box, Button, Typography, Container } from "@material-ui/core";

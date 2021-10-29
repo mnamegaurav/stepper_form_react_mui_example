@@ -251,7 +251,7 @@ export default function EmergencyContactInformation(props) {
             <RadioGroup
               row
               name="guarantor_different"
-              value={formState.guarantor_different || yes_no_choices[1].value}
+              value={formState.guarantor_different || ""}
               onChange={(event) =>
                 handleInputChange({
                   fieldName: event.target.name,
@@ -264,7 +264,7 @@ export default function EmergencyContactInformation(props) {
                 <FormControlLabel
                   key={choice.value}
                   value={choice.value}
-                  control={<Radio />}
+                  control={<Radio required/>}
                   label={choice.label}
                 />
               ))}

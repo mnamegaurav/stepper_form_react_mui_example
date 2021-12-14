@@ -24,7 +24,7 @@ export default function EmergencyContactInformation(props) {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <TextField
             required
             size="small"
@@ -94,6 +94,28 @@ export default function EmergencyContactInformation(props) {
                 fieldValue: value,
               })
             }
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            required
+            type="email"
+            size="small"
+            variant="outlined"
+            label="Emergencey Contact Email"
+            name="emergency_email"
+            placeholder="Emergencey Contact Email"
+            fullWidth
+            defaultValue={formState.emergency_email}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -264,7 +286,7 @@ export default function EmergencyContactInformation(props) {
                 <FormControlLabel
                   key={choice.value}
                   value={choice.value}
-                  control={<Radio required/>}
+                  control={<Radio required />}
                   label={choice.label}
                 />
               ))}

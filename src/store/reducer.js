@@ -64,6 +64,7 @@ export const initialState = {
     emergency_salutation: null,
     emergency_name: "",
     emergency_mobile: "",
+    emergency_email: "",
     emergency_dob: null,
     emergency_relationship: "",
     emergency_address_line_1: "",

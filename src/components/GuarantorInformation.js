@@ -19,7 +19,7 @@ export default function GuarantorInformation(props) {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <TextField
             required={formState.guarantor_different === "Yes"}
             size="small"
@@ -67,6 +67,28 @@ export default function GuarantorInformation(props) {
                   </Select>
                 </InputAdornment>
               ),
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            required
+            type="email"
+            size="small"
+            variant="outlined"
+            label="Guarantor Contact Email"
+            name="guarantor_email"
+            placeholder="Guarantor Contact Email"
+            fullWidth
+            defaultValue={formState.guarantor_email}
+            onChange={(event) =>
+              handleInputChange({
+                fieldName: event.target.name,
+                fieldValue: event.target.value,
+              })
+            }
+            InputLabelProps={{
+              shrink: true,
             }}
           />
         </Grid>

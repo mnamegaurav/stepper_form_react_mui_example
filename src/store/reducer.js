@@ -76,6 +76,7 @@ export const initialState = {
     guarantor_salutation: null,
     guarantor_name: "",
     guarantor_mobile: "",
+    guarantor_email: "",
     guarantor_dob: null,
     guarantor_relationship: "",
     guarantor_address_line_1: "",
